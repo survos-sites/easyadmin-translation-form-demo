@@ -13,29 +13,112 @@ class AppFixtures extends Fixture
     {
 //        $article->setCurrentLocale('en');
 
-        foreach (
+        $defaultLocale = 'en';
+        $articles = [
             [
-                     'hello' => [
-                         'es' => 'Hola',
-                         'fr' => 'Bonjour',
-                     ],
-                     'bye' => [
-                         'es' => 'adios',
-                         'fr' => 'au revoir'
-                     ]
-                 ] as $en => $others) {
+                "title" => [
+                    'en' => 'Hello',
+                    'fr' => 'Bonjour',
+                    'es' => 'Hola',
+                ],
+                "body" => [
+                    'en' => 'Hello Body',
+                    'fr' => 'Bonjour Corps',
+                    'es' => 'Hola Cuerpo',
+                ],
+                "slug" => [
+                    'en' => 'hello_slug',
+                    'fr' => 'bonjour_slug',
+                    'es' => 'hola_slug',
+                ],
+            ],
+            [
+                "title" => [
+                    'en' => 'Bye',
+                    'fr' => 'Au revoir',
+                    'es' => 'Adios',
+                ],
+                "body" => [
+                    'en' => 'Bye Body',
+                    'fr' => 'Au revoir Corps',
+                    'es' => 'Adios Cuerpo',
+                ],
+                "slug" => [
+                    'en' => 'bye_slug',
+                    'fr' => 'au_revoir_slug',
+                    'es' => 'adios_slug',
+                ],
+            ],
+            [
+                "title" => [
+                    'en' => 'Bye2',
+                    'fr' => 'Au revoir2',
+                    'es' => 'Adios2',
+                ],
+                "body" => [
+                    'en' => 'Bye Body2',
+                    'fr' => 'Au revoir Corps2',
+                    'es' => 'Adios Cuerpo2',
+                ],
+                "slug" => [
+                    'en' => 'bye_slug2',
+                    'fr' => 'au_revoir_slug2',
+                    'es' => 'adios_slug2',
+                ],
+            ],
+        ];
+
+        foreach($articles as $articleData) {
             $article = new Article();
             $article->setAuthor('bob');
-            $article->setDefaultLocale('en');
+            $article->setDefaultLocale($defaultLocale);
 
-            $article->translate('en')->setTitle($en);
-            foreach ($others as $locale => $translation) {
-                assert(is_string($translation), json_encode($translation, JSON_PRETTY_PRINT));
-                $article->translate($locale)->setTitle($translation);
+            foreach ($articleData as $field => $translations) {
+                foreach ($translations as $locale => $translation) {
+                    assert(is_string($translation), json_encode($translation, JSON_PRETTY_PRINT));
+                    $article->translate($locale)->{"set$field"}($translation);
+                }
             }
             $manager->persist($article);
             $article->mergeNewTranslations();
         }
+
+        // foreach($articles as $field => $translations) {
+        //     $article = new Article();
+        //     $article->setAuthor('bob');
+        //     $article->setDefaultLocale($defaultLocale);
+
+        //     foreach ($translations as $locale => $translation) {
+        //         assert(is_string($translation), json_encode($translation, JSON_PRETTY_PRINT));
+        //         $article->translate($locale)->{"set$field"}($translation);
+        //     }
+        //     $manager->persist($article);
+        //     $article->mergeNewTranslations();
+        // }
+
+        // foreach (
+        //     [
+        //              'hello' => [
+        //                  'es' => 'Hola',
+        //                  'fr' => 'Bonjour',
+        //              ],
+        //              'bye' => [
+        //                  'es' => 'adios',
+        //                  'fr' => 'au revoir'
+        //              ]
+        //          ] as $en => $others) {
+        //     $article = new Article();
+        //     $article->setAuthor('bob');
+        //     $article->setDefaultLocale('en');
+
+        //     $article->translate('en')->setTitle($en);
+        //     foreach ($others as $locale => $translation) {
+        //         assert(is_string($translation), json_encode($translation, JSON_PRETTY_PRINT));
+        //         $article->translate($locale)->setTitle($translation);
+        //     }
+        //     $manager->persist($article);
+        //     $article->mergeNewTranslations();
+        // }
 
 //        $article->translate('en')->setTitle('Hello!');
 //        $article->translate('fr')->setTitle('Bonjour!');

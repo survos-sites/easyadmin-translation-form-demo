@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\EasyAdmin\Field\TranslationsField;
 use App\EasyAdmin\Filter\TranslatableTextFilter;
 use App\Entity\Article;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Filters;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
@@ -17,6 +18,12 @@ class ArticleCrudController extends AbstractCrudController
     public static function getEntityFqcn(): string
     {
         return Article::class;
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->showEntityActionsInlined();
     }
 
     public function configureFilters(Filters $filters): Filters

@@ -10,11 +10,12 @@
 
 <div class="example-wrapper">
 
-
     {% for locale in app.enabled_locales() %}
-        <a href="">{{ locale }}</a>
+        <button>
+            <a href="{{ path('admin', {_locale: locale}) }}">EZ ADMIN in {{ locale|language_name }}</a>
+            <a href="{{ path('app_homepage', {_locale:locale}) }}">Homepage {{ locale|language_name }}</a>
+        </button>
     {% endfor %}
-    <a href="{{ path('admin') }}">EZ ADMIN</a>
 
     {% for a in articles %}
         <li>

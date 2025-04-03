@@ -4,13 +4,20 @@ namespace App\Controller;
 
 use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 final class AppController extends AbstractController
 {
 
-    #[Route('/{_locale}', name: 'app_app')]
+    #[Route('/', name: 'app_landing')]
+    public function landing(Request $request): Response
+    {
+        return $this->redirectToRoute('app_homepage', ['_locale' => $request->getLocale()]);
+    }
+
+    #[Route('/{_locale}', name: 'app_homepage')]
     public function index(ArticleRepository $articleRepository): Response
     {
         return $this->render('app/index.html.twig', [

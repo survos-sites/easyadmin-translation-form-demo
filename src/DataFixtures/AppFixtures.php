@@ -15,8 +15,9 @@ class AppFixtures extends Fixture
         $article->setAuthor('bob');
         $article->setCurrentLocale('en');
         $article->setDefaultLocale('en');
-        $article->translate('en')->setTitle('Hello');
-        $article->translate('fr')->setTitle('Bonjour');
+        $article->translate('en')->setTitle('Hello!');
+        $article->translate('fr')->setTitle('Bonjour!');
+        $article->translate('es')->setTitle('Hola!');
         $manager->persist($article);
         // $product = new Product();
         // $manager->persist($product);
@@ -24,6 +25,5 @@ class AppFixtures extends Fixture
 // In order to persist new translations, call mergeNewTranslations method, before flush
         $article->mergeNewTranslations();
         $manager->flush();
-        dd($article->getTitle('fr'));
     }
 }

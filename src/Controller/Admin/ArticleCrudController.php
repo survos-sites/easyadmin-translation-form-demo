@@ -29,6 +29,8 @@ class ArticleCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield IdField::new('id')->hideOnForm();
+        yield IdField::new('title')->hideOnForm();
+
 
         yield TranslationsField::new('translations')
             ->addTranslatableField(

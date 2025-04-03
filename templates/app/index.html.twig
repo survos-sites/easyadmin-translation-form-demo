@@ -10,6 +10,25 @@
 
 <div class="example-wrapper">
 
+
+    {% for locale in app.enabled_locales() %}
+        <a href="">{{ locale }}</a>
+    {% endfor %}
     <a href="{{ path('admin') }}">EZ ADMIN</a>
+
+    {% for a in articles %}
+        <li>
+            <h3>{{ a.title|default('~~') }}</h3>
+            {{ a.author }}
+            <ol>
+                {% for t in a.translations %}
+                <li>
+                    {{ t.locale }}: {{ t.title }}
+                {% endfor %}
+                </li>
+
+            </ol>
+        </li>
+    {% endfor %}
 </div>
 {% endblock %}

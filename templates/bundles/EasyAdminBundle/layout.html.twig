@@ -2,5 +2,10 @@
 
 {# extend content_footer #}
 {% block content_footer %}
-    Made with love by SURVOS
+
+    @todo: why is this raw?
+    <a href="{{ repoUrl }}" target="_blank">
+        {{ repoUrl }}
+        {{ ux_icon('mdi:github') }}
+    </a>
 {% endblock %}

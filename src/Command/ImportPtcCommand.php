@@ -93,6 +93,7 @@ final class ImportPtcCommand extends InvokableServiceCommand
         foreach ($locales as $locale) {
             $locale = trim(trim($locale, '-'));
             $path = $dir . "/EN-$locale/EN-$locale.txt";
+            $this->io()->writeln("Adding $path...");
             assert(file_exists($path), "missing $path");
             $csv = Reader::createFromPath($path, 'r')->setDelimiter("\t");
 //            $csv->mapHeader(['common','source','target','tmx','path','fn','id','status']);
@@ -138,15 +139,14 @@ final class ImportPtcCommand extends InvokableServiceCommand
 //                    dd($record, $doc);
                 }
             }
-            $this->entityManager->flush();
-            $this->io()->success("done: " . $this->docRepository->count());
-            return self::SUCCESS;
-            dd();
 
             if ($localeDir<>'en') {
                 $locales[] = $localeDir->getRelativePathname();
             }
+            $this->entityManager->flush();
         }
+        $this->io()->success("done: " . $this->docRepository->count());
+        return self::SUCCESS;
 //        dd(join(',', $locales));
         $txtFinder = (new Finder())->in($dir . '/txt/en')->files()->name('*.txt');
         $progressBar = new ProgressBar($io, $txtFinder->count());
@@ -158,6 +158,7 @@ final class ImportPtcCommand extends InvokableServiceCommand
             foreach ($locales as $locale) {
                 $localeFilename = str_replace('/en/', "/$locale/", $file->getRealPath());
                 if (file_exists($localeFilename)) {
+                    $this->io()->writeln("Adding $locale...");
                     $lines[$locale] = file($localeFilename);
                 }
 //                dd($lines[$locale], $locale);

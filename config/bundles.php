@@ -21,6 +21,6 @@ return [
     Bizkit\VersioningBundle\BizkitVersioningBundle::class => ['all' => true],
     Survos\DeploymentBundle\SurvosDeploymentBundle::class => ['all' => true],
     Survos\Bundle\MakerBundle\SurvosMakerBundle::class => ['dev' => true, 'test' => true],
-    Survos\CommandBundle\SurvosCommandBundle::class => ['all' => true],
+    Survos\CommandBundle\SurvosCommandBundle::class => ['dev' => true],
     Survos\BunnyBundle\SurvosBunnyBundle::class => ['all' => true],
 ];

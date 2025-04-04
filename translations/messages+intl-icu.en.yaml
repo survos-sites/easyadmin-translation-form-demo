@@ -1,3 +1,5 @@
 article: article
 articles: articles
-
+title_help_message: "title help message"
+Help message for slug: "help message for slug"
+Help message for body: "help message for body"

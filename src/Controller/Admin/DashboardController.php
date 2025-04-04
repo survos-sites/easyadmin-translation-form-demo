@@ -14,9 +14,11 @@ use Symfony\Component\Routing\Annotation\Route;
 #[AdminDashboard('/ez')]
 class DashboardController extends AbstractDashboardController
 {
-    public function __construct(private AdminUrlGenerator $adminUrlGenerator)
+    private $adminUrlGenerator;
+    public function __construct(AdminUrlGenerator $adminUrlGenerator)
     {
-    }
+        $this->adminUrlGenerator = $adminUrlGenerator;
+    } 
 
     #[Route('/admin', name: 'admin')]
     public function index(): Response
@@ -27,7 +29,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->setTitle('App')
+            ->setTitle('App')->setLocales(['en', 'fr',"es"]);
         ;
     }
 
@@ -35,4 +37,5 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToCrud('Articles', 'fas fa-pen', Article::class);
     }
+
 }

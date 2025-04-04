@@ -36,7 +36,6 @@ class Article implements TranslatableInterface
 
     public function __get($name): mixed
     {
-        //dd($name);
         return PropertyAccess::createPropertyAccessor()->getValue($this->translate(), $name);
     }
 

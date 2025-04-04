@@ -65,7 +65,7 @@ class ArticleCrudController extends AbstractCrudController
         ;
     }
 
-    public function trans($text,$locale = "fr") {
+    public function trans($text,$locale = "en") {
         return $this->translator->trans($text,[],null,$locale);
     }
 }

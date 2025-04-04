@@ -1,6 +1,8 @@
 {
     "type": "project",
-    "license": "proprietary",
+    "license": "MIT",
+    "name": "survos-sites/ezt",
+    "description": "Translation Management with EasyAdmin",
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {

@@ -20,7 +20,7 @@ use Zenstruck\Console\IO;
 use Zenstruck\Console\RunsCommands;
 use Zenstruck\Console\RunsProcesses;
 
-#[AsCommand('app:ptc', 'Import the Parallel Translation Corpus into Doc entities')]
+#[AsCommand('app:ptc-split', 'Split Parallel Translation Corpus Archive into directories and files')]
 final class SplitPtcCommand extends InvokableServiceCommand
 {
     use RunsCommands;

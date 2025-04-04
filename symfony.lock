@@ -68,6 +68,18 @@
     "knplabs/doctrine-behaviors": {
         "version": "2.6.2"
     },
+    "nyholm/psr7": {
+        "version": "1.8",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "4a8c0345442dcca1d8a2c65633dcf0285dd5a5a2"
+        },
+        "files": [
+            "config/packages/nyholm_psr7.yaml"
+        ]
+    },
     "phpunit/phpunit": {
         "version": "9.6",
         "recipe": {
@@ -80,6 +92,19 @@
             ".env.test",
             "phpunit.xml.dist",
             "tests/bootstrap.php"
+        ]
+    },
+    "survos/bunny-bundle": {
+        "version": "1.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.5",
+            "ref": "38d6e9c843b0244587cadc511aa1437d2c175ca1"
+        },
+        "files": [
+            "config/packages/survos_bunny.yaml",
+            "config/routes/survos_bunny.yaml"
         ]
     },
     "survos/command-bundle": {

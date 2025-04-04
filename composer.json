@@ -18,6 +18,7 @@
         "knplabs/doctrine-behaviors": "dev-sf7.0 as 2.6.3",
         "league/csv": "^9.23",
         "phpdocumentor/reflection-docblock": "^5.3",
+        "survos/bunny-bundle": "^1.5",
         "survos/deployment-bundle": "^1.5",
         "symfony/asset": "^7.2",
         "symfony/asset-mapper": "^7.2",

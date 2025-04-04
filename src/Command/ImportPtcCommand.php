@@ -11,6 +11,7 @@ use League\Csv\Reader;
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Helper\ProgressBar;
 use Symfony\Component\Finder\Finder;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 use Zenstruck\Console\Attribute\Argument;
 use Zenstruck\Console\Attribute\Option;
@@ -84,50 +85,59 @@ final class ImportPtcCommand extends InvokableServiceCommand
                 $locales[] = $locale; // -NL problem
             }
         }
-        $prevTitle = null;
+        $prevCommon = null;
         $doc=[];
         foreach ($locales as $locale) {
             $locale = trim(trim($locale, '-'));
             $path = $dir . "/EN-$locale/EN-$locale.txt";
             assert(file_exists($path), "missing $path");
             $csv = Reader::createFromPath($path, 'r')->setDelimiter("\t");
-//            $csv->mapHeader(['title','source','target','tmx','path','fn','id','status']);
+//            $csv->mapHeader(['common','source','target','tmx','path','fn','id','status']);
 //            $csv->setHeaderOffset(0);
             foreach ($csv->getRecords() as $idx => $record) {
                 array_walk($record, 'trim');
-                [$source, $target, $title, $tmx, $path, $fn, $id, $status] = $record;
-                $title = trim($title);
-                $title = str_replace('COMMON ATTRIBUTES -- ', '', $title);
-                if ($prevTitle !== $title) {
-                    if ($prevTitle) {
-                        if (!$document = $this->docRepository->find($prevTitle)) {
-                            $document=new Doc($prevTitle);
-                            $document->setFilename($prevTitle);
+                [$source, $target, $common, $tmx, $path, $fn, $id, $status] = $record;
+                $common = trim($common);
+                $common = str_replace('COMMON ATTRIBUTES -- ', '', $common);
+                $common = str_replace('Txt::Doc. No.:', '', $common);
+                $common = trim($common);
+
+                $key = (new AsciiSlugger())->slug($common)->toString();
+                if ($prevCommon !== $common) {
+                    if ($prevCommon)
+                    {
+                        $prevKey = (new AsciiSlugger())->slug($prevCommon)->toString();
+                        if (!$document = $this->docRepository->find($prevKey)) {
+                            $document=new Doc($prevKey);
+                            $document->setFilename($prevCommon);
                             $this->entityManager->persist($document);
                         }
-                        foreach($doc[$prevTitle] as $l=>$lines) {
+                        if (!array_key_exists($prevKey, $doc)) {dd($prevKey, $doc);}
+                        foreach($doc[$prevKey] as $l=>$lines) {
                             $title = array_shift($lines);
-                            $document->translate($l)->setTitle($title);
+                            $document->translate($l)->setTitle("$title Rec: $idx");
                             $document->translate($l)->setBody(join("\n", $lines));
                         }
                         $document->mergeNewTranslations();
                         $this->entityManager->flush();
-
                     } else {
                     }
-                    $prevTitle = $title;
+                    $prevCommon = $common;
                 }
-                $doc[$prevTitle]['en'][] = $source;
-                $doc[$prevTitle][strtolower($locale)][] = $target;
+                $doc[$key]['en'][] = $source;
+                $doc[$key][strtolower($locale)][] = $target;
                 if ($idx>14) {
-//                    dump(title: $title, source: $source, target: $target, id: $id);
+//                    dump(common: $common, source: $source, target: $target, id: $id);
                 }
-//                dd($title, $source, $target, $tmx, $path, $fn, $id, status: $status, record: $record);
+//                dd($common, $source, $target, $tmx, $path, $fn, $id, status: $status, record: $record);
                 if ($idx >= $limit-1) {
-                    dd($record, $doc);
+                    break;
+//                    dd($record, $doc);
                 }
             }
             $this->entityManager->flush();
+            $this->io()->success("done: " . $this->docRepository->count());
+            return self::SUCCESS;
             dd();
 
             if ($localeDir<>'en') {

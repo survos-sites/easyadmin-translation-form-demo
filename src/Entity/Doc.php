@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
 use Knp\DoctrineBehaviors\Model\Translatable\TranslatableTrait;
 use Symfony\Component\PropertyAccess\PropertyAccess;
+use Symfony\Component\String\Slugger\AsciiSlugger;
 
 #[ORM\Entity(repositoryClass: ArticleRepository::class)]
 class Doc implements TranslatableInterface
@@ -18,6 +19,10 @@ class Doc implements TranslatableInterface
         #[ORM\Column]
         private ?string $key = null
     )
+    {
+    }
+
+    public function setKey(?string $key): void
     {
         $this->key = $key;
     }
@@ -38,6 +43,9 @@ class Doc implements TranslatableInterface
     public function setFilename(?string $filename): void
     {
         $this->filename = $filename;
+        if (!$this->key) {
+            $this->key = (new AsciiSlugger())->slug($filename);
+        }
     }
 
 

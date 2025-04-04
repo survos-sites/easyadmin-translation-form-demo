@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\Article;
+use App\Entity\Doc;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -39,6 +40,7 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linkToCrud('articles', 'fas fa-pen', Article::class);
+        yield MenuItem::linkToCrud('docs', 'fas fa-pencil', Doc::class);
     }
 
 }

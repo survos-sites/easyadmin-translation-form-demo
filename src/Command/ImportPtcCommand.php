@@ -55,9 +55,12 @@ final class ImportPtcCommand extends InvokableServiceCommand
         }
 //        https://medium.com/@a.marakhin2077/creating-a-file-download-in-symfony-5-from-remote-url-d2a51b1cf547
         $filename = "data/ptc/archive.zip";
-        assert(file_exists($filename), "Missing $filename");
-        if (!file_exists($filename)) {
-            $this->download($url, $filename);
+        if (0) {
+            assert(file_exists($filename), "Missing $filename");
+            if (!file_exists($filename)) {
+                $this->download($url, $filename);
+            }
+
         }
         if (0) // unzip
         if (!file_exists($dir . '/txt')) {

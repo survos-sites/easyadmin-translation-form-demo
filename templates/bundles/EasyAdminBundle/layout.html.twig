@@ -1,12 +1,12 @@
 {% extends '@!EasyAdmin/layout.html.twig' %}
 
 {# extend content_footer #}
-{% block content_footer %}
-
-    @todo: why is this raw?
+{% block content_footer_wrapper %}
+    <section class="content-footer">
     <a href="{{ repoUrl }}" target="_blank">
         {{ repoUrl }}
-        {{ ux_icon('mdi:github') }}
+        <span class="icon">{{ ux_icon('mdi:github') }}</span>
         <a href="https://github.com/a2lix/TranslationFormBundle" target="_blank">a2lix/TranslationFormBundle</a>
     </a>
+    </section>
 {% endblock %}

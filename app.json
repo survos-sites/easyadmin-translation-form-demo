@@ -8,13 +8,13 @@
     "repository": "https://github.com/survos-sites/ezt",
     "scripts": {
         "dokku": {
-            "predeploy": "bin/console importmap:install && bin/console asset-map:compile && bin/console  secrets:decrypt-to-local --force && bin/console doctrine:migrations:migrate -n --allow-no-migration",
+            "predeploy": "bin/console importmap:install && bin/console asset-map:compile && bin/console  secrets:decrypt-to-local --force",
             "postdeploy": "bin/console about"
         }
     },
     "env": {
         "SECRET_TOKEN": {
-            "description": "A secret key for verifying the integrity of signed cookies.",
+            "description": "A secret key for verifying the integrity of signed cookies.  removed  && bin/console doctrine:migrations:migrate -n --allow-no-migration",
             "value": "secret"
         },
         "WEB_CONCURRENCY": {

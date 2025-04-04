@@ -13,6 +13,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\TextFilter;
+use EasyCorp\Bundle\EasyAdminBundle\Field\Field;
+
 
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -54,13 +56,13 @@ class ArticleCrudController extends AbstractCrudController
 
         yield TranslationsField::new('translations')
             ->addTranslatableField(
-                TextField::new('title')->setRequired(true)->setHelp($this->trans('title_help_message'))// ->setColumns(6)
+                TextField::new('title')->setRequired(true)
             )
             ->addTranslatableField(
-                SlugField::new('slug')->setTargetFieldName('title')->setRequired(true)->setHelp($this->trans('Help message for slug'))->setColumns(6)
+                SlugField::new('slug')->setTargetFieldName('title')->setRequired(true)->setColumns(6)
             )
             ->addTranslatableField(
-                TextEditorField::new('body')->setRequired(true)->setHelp($this->trans('Help message for body'))->setNumOfRows(6)->setColumns(12)
+                TextEditorField::new('body')->setRequired(true)->setNumOfRows(6)->setColumns(12)
             )
         ;
     }

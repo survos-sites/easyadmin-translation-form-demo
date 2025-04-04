@@ -3,7 +3,9 @@
 namespace App\Command;
 
 use App\Entity\Article;
+use App\Entity\Doc;
 use App\Repository\ArticleRepository;
+use App\Repository\DocRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use League\Csv\Reader;
 use Symfony\Component\Console\Attribute\AsCommand;
@@ -17,7 +19,7 @@ use Zenstruck\Console\IO;
 use Zenstruck\Console\RunsCommands;
 use Zenstruck\Console\RunsProcesses;
 
-#[AsCommand('app:ptc', 'Import the Parallel Translation Corpus')]
+#[AsCommand('app:ptc', 'Import the Parallel Translation Corpus into Doc entities')]
 final class ImportPtcCommand extends InvokableServiceCommand
 {
     use RunsCommands;
@@ -25,10 +27,10 @@ final class ImportPtcCommand extends InvokableServiceCommand
 
     public function __construct(
         private EntityManagerInterface $entityManager,
-        private ArticleRepository $articleRepository,
-        private HttpClientInterface $httpClient,
-        private string $speaker = '~',
-        private array $seen = [], // to avoid duplicated within a batch
+        private DocRepository          $docRepository,
+        private HttpClientInterface    $httpClient,
+        private string                 $speaker = '~',
+        private array                  $seen = [], // to avoid duplicated within a batch
     )
     {
         parent::__construct('app:euro');
@@ -74,17 +76,58 @@ final class ImportPtcCommand extends InvokableServiceCommand
         $locales = [];
         foreach ($finder as $localeDir) {
             $pair = $localeDir->getBasename();
-            $csv = Reader::createFromPath($localeDir->getRealPath() . "/$pair.txt", 'r')->setDelimiter("\t");
-            $csv->mapHeader(['title','source','target','tmx','path','fn','id','status']);
+            $locale = str_replace('EN', '', $pair);
+            if (str_contains($locale, ' ')) {
+                continue; // ignore NL because of space
+            }
+            if (!str_contains($locale, 'Sample')) {
+                $locales[] = $locale; // -NL problem
+            }
+        }
+        $prevTitle = null;
+        $doc=[];
+        foreach ($locales as $locale) {
+            $locale = trim(trim($locale, '-'));
+            $path = $dir . "/EN-$locale/EN-$locale.txt";
+            assert(file_exists($path), "missing $path");
+            $csv = Reader::createFromPath($path, 'r')->setDelimiter("\t");
+//            $csv->mapHeader(['title','source','target','tmx','path','fn','id','status']);
 //            $csv->setHeaderOffset(0);
             foreach ($csv->getRecords() as $idx => $record) {
-                [$title, $source, $target, $tmx, $path, $fn, $id, $status] = $record;
-                dump($title, $source, $target);
+                array_walk($record, 'trim');
+                [$source, $target, $title, $tmx, $path, $fn, $id, $status] = $record;
+                $title = trim($title);
+                $title = str_replace('COMMON ATTRIBUTES -- ', '', $title);
+                if ($prevTitle !== $title) {
+                    if ($prevTitle) {
+                        if (!$document = $this->docRepository->find($prevTitle)) {
+                            $document=new Doc($prevTitle);
+                            $document->setFilename($prevTitle);
+                            $this->entityManager->persist($document);
+                        }
+                        foreach($doc[$prevTitle] as $l=>$lines) {
+                            $title = array_shift($lines);
+                            $document->translate($l)->setTitle($title);
+                            $document->translate($l)->setBody(join("\n", $lines));
+                        }
+                        $document->mergeNewTranslations();
+                        $this->entityManager->flush();
+
+                    } else {
+                    }
+                    $prevTitle = $title;
+                }
+                $doc[$prevTitle]['en'][] = $source;
+                $doc[$prevTitle][strtolower($locale)][] = $target;
+                if ($idx>14) {
+//                    dump(title: $title, source: $source, target: $target, id: $id);
+                }
 //                dd($title, $source, $target, $tmx, $path, $fn, $id, status: $status, record: $record);
-                if ($idx > $limit) {
-                    dd();
+                if ($idx >= $limit-1) {
+                    dd($record, $doc);
                 }
             }
+            $this->entityManager->flush();
             dd();
 
             if ($localeDir<>'en') {
@@ -135,7 +178,7 @@ final class ImportPtcCommand extends InvokableServiceCommand
                     continue;
                 }
                 $title = substr($line, 0, 60);
-                if (!$article = $this->articleRepository->find($key)) {
+                if (!$article = $this->docRepository->find($key)) {
                     $article=new Article($key);
                     $this->entityManager->persist($article);
                 }

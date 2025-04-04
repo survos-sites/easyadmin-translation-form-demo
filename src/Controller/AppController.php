@@ -14,7 +14,7 @@ final class AppController extends AbstractController
     #[Route('/', name: 'app_landing')]
     public function landing(Request $request): Response
     {
-        return $this->redirectToRoute('app_homepage', ['_locale' => $request->getLocale()]);
+        return $this->redirectToRoute('admin', ['_locale' => $request->getLocale()]);
     }
 
     #[Route('/{_locale}', name: 'app_homepage')]

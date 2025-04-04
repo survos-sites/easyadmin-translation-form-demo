@@ -26,6 +26,9 @@ wget https://www.statmt.org/europarl/v7/europarl.tgz -O data/europarl
 
 More details at https://www.statmt.org/europarl/
 
+https://www.kaggle.com/datasets/hgultekin/paralel-translation-corpus-in-22-languages?resource=download
+
+https://machinetranslate.org/parallel-data#:~:text=Parallel%20data%20or%20parallel%20corpora,and%20test%20machine%20translation%20models.&text=Parallel%20data%20sets%20can%20include,and%20be%20directioned%20or%20directionless.
 ## 
 
 

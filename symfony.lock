@@ -82,6 +82,19 @@
             "tests/bootstrap.php"
         ]
     },
+    "survos/command-bundle": {
+        "version": "1.5",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.5",
+            "ref": "2ae59ea83b8aeb1c288a149af0f594ee9ff52524"
+        },
+        "files": [
+            "config/packages/survos_command.yaml",
+            "config/routes/survos_command.yaml"
+        ]
+    },
     "survos/deployment-bundle": {
         "version": "1.5.529"
     },

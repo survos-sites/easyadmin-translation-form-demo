@@ -18,7 +18,9 @@ class AppFixtures extends Fixture
 
         $header = $csv->getHeader(); //returns the CSV header record
         foreach ($records = $csv->getRecords() as $row) {
-            $article = new Article();
+            $key = hash('xxh3', $row['en']);
+            $article = new Article($key);
+
             $article->setDefaultLocale('en');
             $article->setAuthor('Amazon');
             foreach ($header as $locale) {

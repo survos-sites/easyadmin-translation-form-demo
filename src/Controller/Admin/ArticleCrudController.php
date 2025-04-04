@@ -12,6 +12,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\SlugField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
+use EasyCorp\Bundle\EasyAdminBundle\Filter\TextFilter;
 
 class ArticleCrudController extends AbstractCrudController
 {
@@ -31,19 +32,23 @@ class ArticleCrudController extends AbstractCrudController
     public function configureFilters(Filters $filters): Filters
     {
         return $filters
+            // @todo: key is exact only!
+            ->add(TextFilter::new('key'))
+            // this could be really slow!
             ->add(TranslatableTextFilter::new('title'))
         ;
     }
 
     public function configureFields(string $pageName): iterable
     {
-        yield IdField::new('id')->hideOnForm();
-        yield IdField::new('title')->hideOnForm();
+        yield IdField::new('key')->hideOnForm();
+        yield IdField::new('author');
+        yield IdField::new('title')->hideOnForm()->setColumns(5);
 
 
         yield TranslationsField::new('translations')
             ->addTranslatableField(
-                TextField::new('title')->setRequired(true)->setHelp('Help message for title')->setColumns(6)
+                TextField::new('title')->setRequired(true)->setHelp('Help message for title') // ->setColumns(6)
             )
             ->addTranslatableField(
                 SlugField::new('slug')->setTargetFieldName('title')->setRequired(true)->setHelp('Help message for slug')->setColumns(6)

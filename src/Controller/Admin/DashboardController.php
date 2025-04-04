@@ -31,6 +31,7 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
+            ->renderSidebarMinimized()
             ->setTitle('TranslationFormDemo')->setLocales($this->enabledLocales)
             ;
     }

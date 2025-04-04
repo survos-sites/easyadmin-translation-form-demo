@@ -13,18 +13,23 @@ class Article implements TranslatableInterface
 {
     use TranslatableTrait;
 
-    #[ORM\Id]
-    #[ORM\GeneratedValue]
-    #[ORM\Column]
-    private ?int $id = null;
+    public function __construct(
+        #[ORM\Id]
+        #[ORM\Column]
+        private ?string $key = null
+)
+    {
+        $this->key = $key;
+    }
+
+    public function getKey(): ?string
+    {
+        return $this->key;
+    }
 
     #[ORM\Column(length: 255)]
     private ?string $author = null;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getTitle(?string $locale=null): ?string
     {

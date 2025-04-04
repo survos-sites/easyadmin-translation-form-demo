@@ -22,7 +22,7 @@ final class AppController extends AbstractController
     {
         return $this->render('app/index.html.twig', [
             'controller_name' => 'AppController',
-            'articles' => $articleRepository->findAll(),
+            'articles' => $articleRepository->findBy([], [], 3),
         ]);
     }
 }

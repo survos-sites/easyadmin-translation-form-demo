@@ -1,0 +1,263 @@
+<?php
+
+namespace App\Command;
+
+use App\Entity\Article;
+use App\Entity\Doc;
+use App\Repository\ArticleRepository;
+use App\Repository\DocRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use League\Csv\Reader;
+use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Finder\Finder;
+use Symfony\Component\String\Slugger\AsciiSlugger;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Zenstruck\Console\Attribute\Argument;
+use Zenstruck\Console\Attribute\Option;
+use Zenstruck\Console\InvokableServiceCommand;
+use Zenstruck\Console\IO;
+use Zenstruck\Console\RunsCommands;
+use Zenstruck\Console\RunsProcesses;
+
+#[AsCommand('app:ptc', 'Import the Parallel Translation Corpus into Doc entities')]
+final class SplitPtcCommand extends InvokableServiceCommand
+{
+    use RunsCommands;
+    use RunsProcesses;
+
+    public function __construct(
+        private EntityManagerInterface $entityManager,
+        private DocRepository          $docRepository,
+        private HttpClientInterface    $httpClient,
+        private string                 $speaker = '~',
+        private array                  $seen = [], // to avoid duplicated within a batch
+    )
+    {
+        parent::__construct('app:euro');
+
+    }
+
+    public function __invoke(
+        IO     $io,
+        #[Argument(description: 'url to tar')]
+        string $url = 'https://www.statmt.org/europarl/v7/europarl.tgz',
+
+        #[Option(description: 'limit the number of records')]
+        int    $limit = 50,
+        #[Option(description: 'batch size for flush')]
+        int    $batch = 5,
+    ): int
+    {
+        $dir = 'data/ptc';
+        if (!file_exists($dir)) {
+            mkdir($dir, 0777, true);
+        }
+        // where the translations go as files.
+        $fileDir = 'data/ptc-files';
+        if (!file_exists($dir)) {
+            mkdir($dir, 0777, true);
+        }
+//        https://medium.com/@a.marakhin2077/creating-a-file-download-in-symfony-5-from-remote-url-d2a51b1cf547
+        $filename = "data/ptc/archive.zip";
+        if (0) {
+            assert(file_exists($filename), "Missing $filename");
+            if (!file_exists($filename)) {
+                $this->download($url, $filename);
+            }
+
+        }
+        if (0) // unzip
+        if (!file_exists($dir . '/txt')) {
+            // now untar it, either in php or in exec
+            if (!file_exists($tarFile = str_replace('.tgz', '.tar', $filename))) {
+                $io->warning("decompressing");
+                $p = new \PharData($filename);
+                $p->decompress(); // creates /path/to/my.tar
+            }
+
+            $io->warning("extracting");
+            $phar = new \PharData($tarFile);
+            $phar->extractTo($dir);
+        }
+
+        $finder = (new Finder())->directories()->in($dir);
+        $locales = [];
+        foreach ($finder as $localeDir) {
+            $pair = $localeDir->getBasename();
+            $locale = str_replace('EN', '', $pair);
+            if (str_contains($locale, ' ')) {
+                continue; // ignore NL because of space
+            }
+            if (!str_contains($locale, 'Sample')) {
+                $locales[] = $locale; // -NL problem
+            }
+        }
+        $prevCommon = null;
+        $doc=[];
+        foreach ($locales as $idx=>$locale) {
+            $locale = trim(trim($locale, '-'));
+            $path = $dir . "/EN-$locale/EN-$locale.txt";
+            $this->io()->writeln("Adding $path...");
+            assert(file_exists($path), "missing $path");
+            $csv = Reader::createFromPath($path, 'r')->setDelimiter("\t");
+//            $csv->mapHeader(['common','source','target','tmx','path','fn','id','status']);
+//            $csv->setHeaderOffset(0);
+            foreach ($csv->getRecords() as $idx => $record) {
+                array_walk($record, 'trim');
+                [$source, $target, $common, $tmx, $path, $fn, $id, $status] = $record;
+                $common = trim($common);
+                $common = str_replace('COMMON ATTRIBUTES -- ', '', $common);
+                $common = str_replace('Txt::Doc. No.:', '', $common);
+                $common = trim($common);
+
+                $key = (new AsciiSlugger())->slug($common)->toString();
+                if ($prevCommon !== $common) {
+                    if ($prevCommon)
+                    {
+                        $prevKey = (new AsciiSlugger())->slug($prevCommon)->toString();
+                        // just dump the files
+//                        dd($prevKey, $doc[$prevKey]);
+                        if (!file_exists($x = $fileDir . "/" . $prevKey)) {
+                            mkdir($x, 0777, true);
+                        }
+                        foreach ($doc[$prevKey] as $l=>$lines) {
+//                            if (!file_exists($l)) {
+                                file_put_contents($x . "/$l.txt", join("\n", $lines));
+//                            }
+                        }
+                        unset($doc[$prevKey]); // hackish
+
+//                        if (!$document = $this->docRepository->find($prevKey)) {
+//                            $document=new Doc($prevKey);
+//                            $document->setFilename($prevCommon);
+//                            $this->entityManager->persist($document);
+//                        }
+//                        if (!array_key_exists($prevKey, $doc)) {dd($prevKey, $doc);}
+//                        foreach($doc[$prevKey] as $l=>$lines) {
+//                            $title = array_shift($lines);
+//                            $document->translate($l)->setTitle("$title Rec: $idx");
+//                            $document->translate($l)->setBody(join("\n", $lines));
+//                        }
+//                        $document->mergeNewTranslations();
+//                        $this->entityManager->flush();
+                    } else {
+                    }
+                    $prevCommon = $common;
+                }
+                $doc[$key]['en'][] = $source;
+                $doc[$key][strtolower($locale)][] = $target;
+                if ($idx>14) {
+//                    dump(common: $common, source: $source, target: $target, id: $id);
+                }
+//                dd($common, $source, $target, $tmx, $path, $fn, $id, status: $status, record: $record);
+                if ($limit && ($idx >= $limit-1)) {
+                    break;
+//                    dd($record, $doc);
+                }
+            }
+            // for end.
+            foreach ($doc[$key] as $l=>$lines) {
+                file_put_contents($x . "/$l.txt", join("\n", $lines));
+            }
+
+            if ($localeDir<>'en') {
+                $locales[] = $localeDir->getRelativePathname();
+            }
+            $this->entityManager->flush();
+        }
+        $this->io()->success("done: " . $this->docRepository->count());
+        return self::SUCCESS;
+//        dd(join(',', $locales));
+        $txtFinder = (new Finder())->in($dir . '/txt/en')->files()->name('*.txt');
+        $progressBar = new ProgressBar($io, $txtFinder->count());
+        $progressBar->start();
+        foreach ($txtFinder as $idx => $file) {
+            $progressBar->advance();
+            $lines = []; // some translation files missing
+            $lines['en'] = file($file->getRealPath());
+            foreach ($locales as $locale) {
+                $localeFilename = str_replace('/en/', "/$locale/", $file->getRealPath());
+                if (file_exists($localeFilename)) {
+                    $this->io()->writeln("Adding $locale...");
+                    $lines[$locale] = file($localeFilename);
+                }
+//                dd($lines[$locale], $locale);
+            }
+            $this->process($lines, $locales, $file->getBasename());
+            if (($progressBar->getProgress() % $batch) === 0) {
+                $this->entityManager->flush();
+                $this->seen = [];
+            }
+            if (($progressBar->getProgress() >= $limit-1)) {
+                break;
+            }
+        }
+        $io->success($this->getName() . ' success.');
+
+        return self::SUCCESS;
+    }
+
+    private function process(array $lines, array $locales, string $filename): ?Article
+    {
+        $article = null; // if no lines
+        foreach ($lines['en'] as $idx=>$line) {
+            // <SPEAKER ID="053" NAME="Jo Leinen  " AFFILIATION="PSE">
+            if (preg_match('/SPEAKER ID="(\d*)" NAME="(.*?)"/', $line, $match)) {
+                $this->speaker = trim($match[2]);
+                // we _could_ do a related table, etc.
+            }
+            if ($this->isValid($line)) {
+                $key = hash('xxh3', $line);
+                if (in_array($key, $this->seen)) {
+                    continue;
+                }
+                $title = substr($line, 0, 60);
+                if (!$article = $this->docRepository->find($key)) {
+                    $article=new Article($key);
+                    $this->entityManager->persist($article);
+                }
+                $this->seen[] = $key;
+                $article->setAuthor($this->speaker); // @todo: look for speaker?
+                // now set each translation
+                foreach ($locales as $locale) {
+                    if (array_key_exists($locale, $lines)) {
+                        $article->translate($locale)->setTitle($title . "- " .$locale);
+                        $article->translate($locale)->setBody($lines[$locale][$idx]??null);
+                    }
+                }
+                $article->mergeNewTranslations();
+            }
+        }
+        return $article;
+    }
+
+    private function isValid(string $line): bool
+    {
+        if (str_starts_with($line, '<')) {
+            return false;
+        }
+        return true;
+    }
+
+    private function download(string $url, string $filename)
+    {
+        // https://github.com/zizoujab/FileDownloadCommand
+        $progressBar = new ProgressBar($this->io()->output(), 100);
+        $response = $this->httpClient->request('GET', $url, [
+            'on_progress' => function (int $dlNow, int $dlSize, array $info) use ($progressBar) {
+                if ($dlSize && $dlNow > 0 ){
+                    $progressBar->setProgress(intval($dlNow*100 / $dlSize));
+                    if ($dlNow == $dlSize){
+                        $progressBar->finish();
+                    }
+                }
+            }
+        ]);
+        $filHandler = fopen($filename , 'w');
+        foreach ($this->httpClient->stream($response) as $chunk) {
+            fwrite($filHandler, $chunk->getContent());
+        }
+
+    }
+}

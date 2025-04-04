@@ -1,3 +1,5 @@
 article: artículo
 articles: artículos
-
+title_help_message: "mensaje de ayuda sobre el título"
+Help message for slug: "mensaje de ayuda sobre el slug"
+Help message for body: "mensaje de ayuda sobre el cuerpo"

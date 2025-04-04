@@ -14,8 +14,15 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Filter\TextFilter;
 
+use Symfony\Contracts\Translation\TranslatorInterface;
+
 class ArticleCrudController extends AbstractCrudController
 {
+    private $translator;
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
     public static function getEntityFqcn(): string
     {
         return Article::class;
@@ -42,20 +49,23 @@ class ArticleCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         yield IdField::new('key')->hideOnForm();
-        yield IdField::new('author');
-        yield IdField::new('title')->hideOnForm()->setColumns(5);
-
+        yield IdField::new('author')->setMaxLength(60);
+        yield IdField::new('title')->hideOnForm()->setColumns(5)->setMaxLength(60);
 
         yield TranslationsField::new('translations')
             ->addTranslatableField(
-                TextField::new('title')->setRequired(true)->setHelp('Help message for title') // ->setColumns(6)
+                TextField::new('title')->setRequired(true)->setHelp($this->trans('title_help_message'))// ->setColumns(6)
             )
             ->addTranslatableField(
-                SlugField::new('slug')->setTargetFieldName('title')->setRequired(true)->setHelp('Help message for slug')->setColumns(6)
+                SlugField::new('slug')->setTargetFieldName('title')->setRequired(true)->setHelp($this->trans('Help message for slug'))->setColumns(6)
             )
             ->addTranslatableField(
-                TextEditorField::new('body')->setRequired(true)->setHelp('Help message for body')->setNumOfRows(6)->setColumns(12)
+                TextEditorField::new('body')->setRequired(true)->setHelp($this->trans('Help message for body'))->setNumOfRows(6)->setColumns(12)
             )
         ;
+    }
+
+    public function trans($text,$locale = "fr") {
+        return $this->translator->trans($text,[],null,$locale);
     }
 }

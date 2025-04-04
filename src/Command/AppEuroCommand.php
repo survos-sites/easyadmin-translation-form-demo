@@ -45,6 +45,7 @@ final class AppEuroCommand extends InvokableServiceCommand
         int    $batch = 5,
     ): int
     {
+        ini_set('memory_limit', '-1');
         $dir = 'data/europarl';
         if (!file_exists($dir)) {
             mkdir($dir, 0777, true);

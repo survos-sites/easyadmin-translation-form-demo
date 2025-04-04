@@ -13,6 +13,7 @@
         "doctrine/orm": "^2.16 || ^3.0",
         "easycorp/easyadmin-bundle": "^4.7",
         "knplabs/doctrine-behaviors": "dev-sf7.0 as 2.6.3",
+        "league/csv": "^9.23",
         "phpdocumentor/reflection-docblock": "^5.3",
         "symfony/asset": "^7.2",
         "symfony/console": "^7.2",

@@ -6,11 +6,33 @@ use App\Entity\Article;
 use App\Entity\ArticleTranslation;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use League\Csv\Reader;
 
 class AppFixtures extends Fixture
 {
     public function load(ObjectManager $manager): void
     {
+
+        $csv = Reader::createFromPath('data/amazon.csv', 'r');
+        $csv->setHeaderOffset(0);
+
+        $header = $csv->getHeader(); //returns the CSV header record
+        foreach ($records = $csv->getRecords() as $row) {
+            $article = new Article();
+            $article->setDefaultLocale('en');
+            $article->setAuthor('Amazon');
+            foreach ($header as $locale) {
+                $article->translate($locale)->setTitle($row[$locale]);
+            }
+            $manager->persist($article);
+            $article->mergeNewTranslations();
+        }
+        $manager->flush();
+    }
+
+    private function oldWay() {
+
+//returns all the records as
 //        $article->setCurrentLocale('en');
 
         $defaultLocale = 'en';

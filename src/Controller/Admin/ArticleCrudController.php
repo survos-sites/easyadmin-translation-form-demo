@@ -23,6 +23,8 @@ class ArticleCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
+//            ->setPageTitle(Crud::PAGE_INDEX, '%entity_label_plural% listing')
+            ->setPageTitle(Crud::PAGE_INDEX, 'articles')
             ->showEntityActionsInlined();
     }
 

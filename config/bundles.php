@@ -23,4 +23,5 @@ return [
     Survos\Bundle\MakerBundle\SurvosMakerBundle::class => ['dev' => true, 'test' => true],
     Survos\CommandBundle\SurvosCommandBundle::class => ['dev' => true],
     Survos\BunnyBundle\SurvosBunnyBundle::class => ['all' => true],
+    Inspector\Symfony\Bundle\InspectorBundle::class => ['all' => true],
 ];

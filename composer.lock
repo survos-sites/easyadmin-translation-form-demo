@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0c73fb80e3b6b16eee50a615001cbecc",
+    "content-hash": "3fb9b443b049a4a8bf5fdbba9c862bb1",
     "packages": [
         {
             "name": "a2lix/auto-form-bundle",
@@ -289,6 +289,263 @@
                 }
             ],
             "time": "2025-02-28T13:11:00+00:00"
+        },
+        {
+            "name": "cmsig/seal",
+            "version": "0.7.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHP-CMSIG/seal.git",
+                "reference": "27c250fd4a40cfbbb516c1e8fa5316852ed4e570"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHP-CMSIG/seal/zipball/27c250fd4a40cfbbb516c1e8fa5316852ed4e570",
+                "reference": "27c250fd4a40cfbbb516c1e8fa5316852ed4e570",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^8.1"
+            },
+            "replace": {
+                "schranz-search/seal": "self.version"
+            },
+            "require-dev": {
+                "php-cs-fixer/shim": "^3.51",
+                "phpstan/extension-installer": "^1.2",
+                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan-phpunit": "^1.3",
+                "phpunit/phpunit": "^10.3",
+                "rector/rector": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CmsIg\\Seal\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Schranz",
+                    "email": "alexander@sulu.io"
+                }
+            ],
+            "description": "Search Engine Abstraction Layer",
+            "keywords": [
+                "abstraction",
+                "algolia",
+                "cmsig",
+                "elasticsearch",
+                "meilisearch",
+                "opensearch",
+                "redisearch",
+                "seal",
+                "search",
+                "search-abstraction",
+                "search-client",
+                "solr",
+                "typesense"
+            ],
+            "support": {
+                "source": "https://github.com/PHP-CMSIG/seal/tree/0.7.2"
+            },
+            "funding": [
+                {
+                    "url": "https://paypal.me/L91",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/alexander-schranz",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-04-01T11:14:25+00:00"
+        },
+        {
+            "name": "cmsig/seal-meilisearch-adapter",
+            "version": "0.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHP-CMSIG/seal-meilisearch-adapter.git",
+                "reference": "1ad082e5a3df44a4ad2ab380de208cc85b95feca"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHP-CMSIG/seal-meilisearch-adapter/zipball/1ad082e5a3df44a4ad2ab380de208cc85b95feca",
+                "reference": "1ad082e5a3df44a4ad2ab380de208cc85b95feca",
+                "shasum": ""
+            },
+            "require": {
+                "cmsig/seal": "^0.7",
+                "meilisearch/meilisearch-php": "^1.2",
+                "php": "^8.1",
+                "psr/container": "^1.0 || ^2.0"
+            },
+            "replace": {
+                "schranz-search/seal-meilisearch-adapter": "self.version"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "^7.5",
+                "http-interop/http-factory-guzzle": "^1.0",
+                "php-cs-fixer/shim": "^3.51",
+                "phpstan/extension-installer": "^1.2",
+                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan-phpunit": "^1.3",
+                "phpunit/phpunit": "^10.3",
+                "rector/rector": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "CmsIg\\Seal\\Adapter\\Meilisearch\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Schranz",
+                    "email": "alexander@sulu.io"
+                }
+            ],
+            "description": "An adapter to support meilisearch in cmsig/seal search abstraction.",
+            "keywords": [
+                "cmsig",
+                "meilisearch",
+                "seal",
+                "seal-adapter",
+                "search-client"
+            ],
+            "support": {
+                "source": "https://github.com/PHP-CMSIG/seal-meilisearch-adapter/tree/0.7.1"
+            },
+            "funding": [
+                {
+                    "url": "https://paypal.me/L91",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/alexander-schranz",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-03-18T11:26:16+00:00"
+        },
+        {
+            "name": "cmsig/seal-symfony-bundle",
+            "version": "0.7.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/PHP-CMSIG/seal-symfony-bundle.git",
+                "reference": "73cc50c692b258dbbbfe3c4d4cc8a5f682e33b10"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/PHP-CMSIG/seal-symfony-bundle/zipball/73cc50c692b258dbbbfe3c4d4cc8a5f682e33b10",
+                "reference": "73cc50c692b258dbbbfe3c4d4cc8a5f682e33b10",
+                "shasum": ""
+            },
+            "require": {
+                "cmsig/seal": "^0.7",
+                "php": "^8.1",
+                "symfony/config": "^6.1 || ^7.0",
+                "symfony/console": "^6.1 || ^7.0",
+                "symfony/dependency-injection": "^6.1 || ^7.0",
+                "symfony/http-kernel": "^6.1 || ^7.0"
+            },
+            "conflict": {
+                "cmsig/seal-algolia-adapter": "<0.7 || >=0.8",
+                "cmsig/seal-elasticsearch-adapter": "<0.7 || >=0.8",
+                "cmsig/seal-loupe-adapter": "<0.7 || >=0.8",
+                "cmsig/seal-meilisearch-adapter": "<0.7 || >=0.8",
+                "cmsig/seal-memory-adapter": "<0.7 || >=0.8",
+                "cmsig/seal-multi-adapter": "<0.7 || >=0.8",
+                "cmsig/seal-opensearch-adapter": "<0.7 || >=0.8",
+                "cmsig/seal-read-write-adapter": "<0.7 || >=0.8",
+                "cmsig/seal-redisearch-adapter": "<0.7 || >=0.8",
+                "cmsig/seal-solr-adapter": "<0.7 || >=0.8",
+                "cmsig/seal-typesense-adapter": "<0.7 || >=0.8"
+            },
+            "replace": {
+                "schranz-search/symfony-bundle": "self.version"
+            },
+            "require-dev": {
+                "cmsig/seal-algolia-adapter": "^0.7",
+                "cmsig/seal-elasticsearch-adapter": "^0.7",
+                "cmsig/seal-loupe-adapter": "^0.7",
+                "cmsig/seal-meilisearch-adapter": "^0.7",
+                "cmsig/seal-memory-adapter": "^0.7",
+                "cmsig/seal-multi-adapter": "^0.7",
+                "cmsig/seal-opensearch-adapter": "^0.7",
+                "cmsig/seal-read-write-adapter": "^0.7",
+                "cmsig/seal-redisearch-adapter": "^0.7",
+                "cmsig/seal-solr-adapter": "^0.7",
+                "cmsig/seal-typesense-adapter": "^0.7",
+                "php-cs-fixer/shim": "^3.51",
+                "phpstan/extension-installer": "^1.2",
+                "phpstan/phpstan": "^1.10",
+                "phpstan/phpstan-phpunit": "^1.3",
+                "phpunit/phpunit": "^10.3",
+                "rector/rector": "^1.0"
+            },
+            "type": "symfony-bundle",
+            "autoload": {
+                "psr-4": {
+                    "CmsIg\\Seal\\Integration\\Symfony\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Alexander Schranz",
+                    "email": "alexander@sulu.io"
+                }
+            ],
+            "description": "An integration of CMS-IG SEAL search abstraction into Symfony Framework.",
+            "keywords": [
+                "Bridge",
+                "abstraction",
+                "algolia",
+                "bundle",
+                "cmsig",
+                "elasticsearch",
+                "integration",
+                "loupe",
+                "meilisearch",
+                "opensearch",
+                "redisearch",
+                "seal",
+                "search",
+                "search-abstraction",
+                "search-client",
+                "solr",
+                "symfony",
+                "symfony-bundle",
+                "typesense"
+            ],
+            "support": {
+                "source": "https://github.com/PHP-CMSIG/seal-symfony-bundle/tree/0.7.1"
+            },
+            "funding": [
+                {
+                    "url": "https://paypal.me/L91",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/alexander-schranz",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-03-19T15:54:07+00:00"
         },
         {
             "name": "composer/semver",
@@ -2064,6 +2321,73 @@
             "time": "2025-03-28T06:52:04+00:00"
         },
         {
+            "name": "meilisearch/meilisearch-php",
+            "version": "v1.13.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/meilisearch/meilisearch-php.git",
+                "reference": "16a3c31ddbe8eaec3aa1e1da3bada906d57dfc66"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/meilisearch/meilisearch-php/zipball/16a3c31ddbe8eaec3aa1e1da3bada906d57dfc66",
+                "reference": "16a3c31ddbe8eaec3aa1e1da3bada906d57dfc66",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "php": "^7.4 || ^8.0",
+                "php-http/discovery": "^1.7",
+                "psr/http-client": "^1.0"
+            },
+            "require-dev": {
+                "guzzlehttp/guzzle": "^7.8.1",
+                "http-interop/http-factory-guzzle": "^1.2.0",
+                "php-cs-fixer/shim": "^3.59.3",
+                "phpstan/extension-installer": "^1.4.1",
+                "phpstan/phpstan": "^2.0",
+                "phpstan/phpstan-deprecation-rules": "^2.0",
+                "phpstan/phpstan-phpunit": "^2.0",
+                "phpstan/phpstan-strict-rules": "^2.0",
+                "phpunit/phpunit": "^9.5 || ^10.5"
+            },
+            "suggest": {
+                "guzzlehttp/guzzle": "Use Guzzle ^7 as HTTP client",
+                "http-interop/http-factory-guzzle": "Factory for guzzlehttp/guzzle"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "MeiliSearch\\": "src/",
+                    "Meilisearch\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Clementine",
+                    "email": "clementine@meilisearch.com"
+                }
+            ],
+            "description": "PHP wrapper for the Meilisearch API",
+            "keywords": [
+                "api",
+                "client",
+                "instant",
+                "meilisearch",
+                "php",
+                "search"
+            ],
+            "support": {
+                "issues": "https://github.com/meilisearch/meilisearch-php/issues",
+                "source": "https://github.com/meilisearch/meilisearch-php/tree/v1.13.0"
+            },
+            "time": "2025-02-17T12:48:45+00:00"
+        },
+        {
             "name": "monolog/monolog",
             "version": "3.9.0",
             "source": {
@@ -2329,6 +2653,85 @@
                 }
             ],
             "time": "2024-09-09T07:06:30+00:00"
+        },
+        {
+            "name": "php-http/discovery",
+            "version": "1.20.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-http/discovery.git",
+                "reference": "82fe4c73ef3363caed49ff8dd1539ba06044910d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-http/discovery/zipball/82fe4c73ef3363caed49ff8dd1539ba06044910d",
+                "reference": "82fe4c73ef3363caed49ff8dd1539ba06044910d",
+                "shasum": ""
+            },
+            "require": {
+                "composer-plugin-api": "^1.0|^2.0",
+                "php": "^7.1 || ^8.0"
+            },
+            "conflict": {
+                "nyholm/psr7": "<1.0",
+                "zendframework/zend-diactoros": "*"
+            },
+            "provide": {
+                "php-http/async-client-implementation": "*",
+                "php-http/client-implementation": "*",
+                "psr/http-client-implementation": "*",
+                "psr/http-factory-implementation": "*",
+                "psr/http-message-implementation": "*"
+            },
+            "require-dev": {
+                "composer/composer": "^1.0.2|^2.0",
+                "graham-campbell/phpspec-skip-example-extension": "^5.0",
+                "php-http/httplug": "^1.0 || ^2.0",
+                "php-http/message-factory": "^1.0",
+                "phpspec/phpspec": "^5.1 || ^6.1 || ^7.3",
+                "sebastian/comparator": "^3.0.5 || ^4.0.8",
+                "symfony/phpunit-bridge": "^6.4.4 || ^7.0.1"
+            },
+            "type": "composer-plugin",
+            "extra": {
+                "class": "Http\\Discovery\\Composer\\Plugin",
+                "plugin-optional": true
+            },
+            "autoload": {
+                "psr-4": {
+                    "Http\\Discovery\\": "src/"
+                },
+                "exclude-from-classmap": [
+                    "src/Composer/Plugin.php"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Márk Sági-Kazár",
+                    "email": "mark.sagikazar@gmail.com"
+                }
+            ],
+            "description": "Finds and installs PSR-7, PSR-17, PSR-18 and HTTPlug implementations",
+            "homepage": "http://php-http.org",
+            "keywords": [
+                "adapter",
+                "client",
+                "discovery",
+                "factory",
+                "http",
+                "message",
+                "psr17",
+                "psr7"
+            ],
+            "support": {
+                "issues": "https://github.com/php-http/discovery/issues",
+                "source": "https://github.com/php-http/discovery/tree/1.20.0"
+            },
+            "time": "2024-10-02T11:20:13+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
@@ -3252,6 +3655,95 @@
                 }
             ],
             "time": "2025-02-08T18:49:23+00:00"
+        },
+        {
+            "name": "survos/core-bundle",
+            "version": "1.5.529",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/survos/SurvosCoreBundle.git",
+                "reference": "468332bcb862b8943f9bb6d5f215939cdf5c5bbf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/survos/SurvosCoreBundle/zipball/468332bcb862b8943f9bb6d5f215939cdf5c5bbf",
+                "reference": "468332bcb862b8943f9bb6d5f215939cdf5c5bbf",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/common": "^3.4",
+                "doctrine/orm": "^3.2",
+                "php": "^8.3",
+                "symfony/config": "^6.4 || ^7.1",
+                "symfony/dependency-injection": "^6.4 || ^7.1",
+                "symfony/http-kernel": "^6.4 || ^7.1",
+                "symfony/property-access": "^6.4 || ^7.1",
+                "symfony/serializer": "^6.4 || ^7.1",
+                "symfony/string": "^6.4 || ^7.1",
+                "twig/twig": "^3.4"
+            },
+            "conflict": {
+                "survos/api-grid-bundle": "<1.2.57",
+                "survos/auth-bundle": "<1.2.57",
+                "survos/barcode-bundle": "<1.2.57",
+                "survos/bootstrap-bundle": "<1.2.57",
+                "survos/command-bundle": "<1.2.57",
+                "survos/crawler-bundle": "<1.2.57",
+                "survos/doc-bundle": "<1.2.57",
+                "survos/faker-bundle": "<1.2.57",
+                "survos/grid-bundle": "<1.2.57",
+                "survos/grid-group-bundle": "<1.2.57",
+                "survos/html-prettify-bundle": "<1.2.57",
+                "survos/import-bridge": "<1.2.57",
+                "survos/inspection-bundle": "<1.2.57",
+                "survos/location-bundle": "<1.2.57",
+                "survos/maker-bundle": "<1.2.57",
+                "survos/providence-bundle": "<1.2.57",
+                "survos/ruler-bundle": "<1.2.57",
+                "survos/stripe-product": "<1.2.57",
+                "survos/tree-bundle": "<1.2.57",
+                "survos/wiki-bundle": "<1.2.57",
+                "survos/workflow-helper-bundle": "<1.2.57"
+            },
+            "require-dev": {
+                "phpstan/phpstan": "^2.0",
+                "symfony/asset-mapper": "^6.4 || ^7.1",
+                "symfony/browser-kit": "^6.4 || ^7.1",
+                "symfony/framework-bundle": "^6.4 || ^7.1",
+                "symfony/phpunit-bridge": "^6.4 || ^7.1",
+                "symfony/twig-bundle": "^6.4 || ^7.1",
+                "symfony/var-dumper": "^6.4 || ^7.1"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-main": "1.6-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Survos\\CoreBundle\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Traits and Interfaces common to other Survos bundles",
+            "keywords": [
+                "symfony entity routing"
+            ],
+            "support": {
+                "issues": "https://github.com/survos/SurvosCoreBundle/issues",
+                "source": "https://github.com/survos/SurvosCoreBundle/tree/1.5.529"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/kbond",
+                    "type": "github"
+                }
+            ],
+            "time": "2025-02-20T13:35:55+00:00"
         },
         {
             "name": "survos/deployment-bundle",

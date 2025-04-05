@@ -30,6 +30,9 @@ class DocTranslation implements TranslationInterface
     #[ORM\Column(type: Types::TEXT, nullable: true)]
     private ?string $body = null;
 
+    #[ORM\Column(nullable: true)]
+    private ?int $characterCount = null;
+
 
     public function getTitle(): ?string
     {
@@ -51,6 +54,18 @@ class DocTranslation implements TranslationInterface
     public function setBody(?string $body): static
     {
         $this->body = $body;
+        $this->setCharacterCount(strlen($body));
+        return $this;
+    }
+
+    public function getCharacterCount(): ?int
+    {
+        return $this->characterCount;
+    }
+
+    public function setCharacterCount(?int $characterCount): static
+    {
+        $this->characterCount = $characterCount;
 
         return $this;
     }

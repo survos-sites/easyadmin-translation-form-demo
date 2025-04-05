@@ -3,13 +3,16 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use App\Repository\DocRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslatableInterface;
 use Knp\DoctrineBehaviors\Model\Translatable\TranslatableTrait;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\String\Slugger\AsciiSlugger;
+use Symfony\Component\Validator\Constraints as Assert;
 
-#[ORM\Entity(repositoryClass: ArticleRepository::class)]
+#[ORM\Entity(repositoryClass: DocRepository::class)]
+#[ORM\Index(name: 'line_count_index', columns: ['line_count'])]
 class Doc implements TranslatableInterface
 {
     use TranslatableTrait;
@@ -35,6 +38,11 @@ class Doc implements TranslatableInterface
     #[ORM\Column(length: 255)]
     private ?string $filename = null;
 
+    #[ORM\Column]
+    #[Assert\NotNull()]
+    #[Assert\GreaterThan(0)]
+    private int $lineCount = -2;
+
     public function getFilename(): ?string
     {
         return $this->filename;
@@ -44,7 +52,7 @@ class Doc implements TranslatableInterface
     {
         $this->filename = $filename;
         if (!$this->key) {
-            $this->key = (new AsciiSlugger())->slug($filename);
+            $this->key = new AsciiSlugger()->slug($filename);
         }
     }
 
@@ -60,6 +68,18 @@ class Doc implements TranslatableInterface
     public function __get($name): mixed
     {
         return PropertyAccess::createPropertyAccessor()->getValue($this->translate(), $name);
+    }
+
+    public function getLineCount(): ?int
+    {
+        return $this->lineCount;
+    }
+
+    public function setLineCount(int $lineCount): static
+    {
+        $this->lineCount = $lineCount;
+
+        return $this;
     }
 
 }

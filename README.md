@@ -17,6 +17,18 @@ https://dzhebrak.com/blog/translating-entities-easyadmin-doctrinebehaviors?utm_s
 
 # Data
 
+## Parallel Translation Corpus
+
+Source:
+* https://www.kaggle.com/datasets/hgultekin/paralel-translation-corpus-in-22-languages?resource=download
+* https://machinetranslate.org/parallel-data#:~:text=Parallel%20data%20or%20parallel%20corpora,and%20test%20machine%20translation%20models.&text=Parallel%20data%20sets%20can%20include,and%20be%20directioned%20or%20directionless.
+
+```bash
+bin/console app:ptc-split  --limit 50
+bin/console app:ptc-import --limit 1000 --batch 100 --no-debug
+```
+
+
 ## European Parliament.
 Language pairs from the European Parliament. Not globally aligned (files are paired by source/target), but could be interesting to find common phrases.  1.5G compressed
 
@@ -26,9 +38,6 @@ wget https://www.statmt.org/europarl/v7/europarl.tgz -O data/europarl
 
 More details at https://www.statmt.org/europarl/
 
-https://www.kaggle.com/datasets/hgultekin/paralel-translation-corpus-in-22-languages?resource=download
-
-https://machinetranslate.org/parallel-data#:~:text=Parallel%20data%20or%20parallel%20corpora,and%20test%20machine%20translation%20models.&text=Parallel%20data%20sets%20can%20include,and%20be%20directioned%20or%20directionless.
 ## 
 
 
@@ -37,4 +46,6 @@ https://www.kaggle.com/datasets/hgultekin/paralel-translation-corpus-in-22-langu
 pd.read_csv(CD+SL+'-'+TL+'/'+SL+'-'+TL+'.txt', sep='\t', header = None)[[0,1]].rename(columns = {0:SL, 1:TL})
 
 An "Article" entity will be created with the ability to translate title, slug and content into multiple languages (English and French - mandatory, German - optional), as well as the ability to filter by translated fields.
+
+Many documents are missing and will default to English, e.g 21973A0630-01 is not in EN-DE or EN-DA
 

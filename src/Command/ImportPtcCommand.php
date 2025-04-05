@@ -58,7 +58,7 @@ final class ImportPtcCommand extends InvokableServiceCommand
             return self::FAILURE;
         }
         // where the translations go as files.
-        $fileDir = 'data/ptc-files';
+        $fileDir = 'data/ptc/files';
         if (!file_exists($dir)) {
             $this->io()->error("Run app:ptc-split first");
             return self::FAILURE;

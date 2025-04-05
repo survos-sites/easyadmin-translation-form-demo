@@ -19,6 +19,8 @@ https://dzhebrak.com/blog/translating-entities-easyadmin-doctrinebehaviors?utm_s
 
 ## Parallel Translation Corpus
 
+curl -L -o ptc.zip https://www.kaggle.com/api/v1/datasets/download/hgultekin/paralel-translation-corpus-in-22-languages
+
 Source:
 * https://www.kaggle.com/datasets/hgultekin/paralel-translation-corpus-in-22-languages?resource=download
 * https://machinetranslate.org/parallel-data#:~:text=Parallel%20data%20or%20parallel%20corpora,and%20test%20machine%20translation%20models.&text=Parallel%20data%20sets%20can%20include,and%20be%20directioned%20or%20directionless.

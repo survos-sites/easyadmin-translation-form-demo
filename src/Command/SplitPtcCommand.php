@@ -49,12 +49,12 @@ final class SplitPtcCommand extends InvokableServiceCommand
         int    $batch = 5,
     ): int
     {
-        $dir = 'data/ptc';
+        $dir = 'data/ptc/pairs';
         if (!file_exists($dir)) {
             mkdir($dir, 0777, true);
         }
         // where the translations go as files.
-        $fileDir = 'data/ptc-files';
+        $fileDir = 'data/ptc/files';
         if (!file_exists($dir)) {
             mkdir($dir, 0777, true);
         }

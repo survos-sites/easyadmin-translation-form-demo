@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3fb9b443b049a4a8bf5fdbba9c862bb1",
+    "content-hash": "9a3242b40b30ecaf50c4c13143f923e4",
     "packages": [
         {
             "name": "a2lix/auto-form-bundle",
@@ -3658,16 +3658,16 @@
         },
         {
             "name": "survos/core-bundle",
-            "version": "1.5.529",
+            "version": "dev-main",
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/SurvosCoreBundle.git",
-                "reference": "468332bcb862b8943f9bb6d5f215939cdf5c5bbf"
+                "reference": "5df33595fc0998069832a8004f567d305140b119"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/survos/SurvosCoreBundle/zipball/468332bcb862b8943f9bb6d5f215939cdf5c5bbf",
-                "reference": "468332bcb862b8943f9bb6d5f215939cdf5c5bbf",
+                "url": "https://api.github.com/repos/survos/SurvosCoreBundle/zipball/5df33595fc0998069832a8004f567d305140b119",
+                "reference": "5df33595fc0998069832a8004f567d305140b119",
                 "shasum": ""
             },
             "require": {
@@ -3709,11 +3709,13 @@
                 "phpstan/phpstan": "^2.0",
                 "symfony/asset-mapper": "^6.4 || ^7.1",
                 "symfony/browser-kit": "^6.4 || ^7.1",
+                "symfony/console": "^7.2",
                 "symfony/framework-bundle": "^6.4 || ^7.1",
                 "symfony/phpunit-bridge": "^6.4 || ^7.1",
                 "symfony/twig-bundle": "^6.4 || ^7.1",
                 "symfony/var-dumper": "^6.4 || ^7.1"
             },
+            "default-branch": true,
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
@@ -3735,7 +3737,7 @@
             ],
             "support": {
                 "issues": "https://github.com/survos/SurvosCoreBundle/issues",
-                "source": "https://github.com/survos/SurvosCoreBundle/tree/1.5.529"
+                "source": "https://github.com/survos/SurvosCoreBundle/tree/main"
             },
             "funding": [
                 {
@@ -3743,7 +3745,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-02-20T13:35:55+00:00"
+            "time": "2025-04-05T15:32:02+00:00"
         },
         {
             "name": "survos/deployment-bundle",
@@ -8806,16 +8808,16 @@
         },
         {
             "name": "symfony/ux-icons",
-            "version": "v2.23.0",
+            "version": "v2.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-icons.git",
-                "reference": "6aa0b14dededcd65c515c445aedfda318fa61f9e"
+                "reference": "39f689b41081f7788ee9c4a188817599d546bfb2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-icons/zipball/6aa0b14dededcd65c515c445aedfda318fa61f9e",
-                "reference": "6aa0b14dededcd65c515c445aedfda318fa61f9e",
+                "url": "https://api.github.com/repos/symfony/ux-icons/zipball/39f689b41081f7788ee9c4a188817599d546bfb2",
+                "reference": "39f689b41081f7788ee9c4a188817599d546bfb2",
                 "shasum": ""
             },
             "require": {
@@ -8875,7 +8877,7 @@
                 "twig"
             ],
             "support": {
-                "source": "https://github.com/symfony/ux-icons/tree/v2.23.0"
+                "source": "https://github.com/symfony/ux-icons/tree/v2.24.0"
             },
             "funding": [
                 {
@@ -8891,20 +8893,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-12-26T07:58:05+00:00"
+            "time": "2025-04-04T17:32:18+00:00"
         },
         {
             "name": "symfony/ux-twig-component",
-            "version": "v2.23.0",
+            "version": "v2.24.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/ux-twig-component.git",
-                "reference": "f29033b95e93aea2d498dc40eac185ed14b07800"
+                "reference": "48a46e4c6215d41cc97ba8dff0cff21ea9b255a8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/ux-twig-component/zipball/f29033b95e93aea2d498dc40eac185ed14b07800",
-                "reference": "f29033b95e93aea2d498dc40eac185ed14b07800",
+                "url": "https://api.github.com/repos/symfony/ux-twig-component/zipball/48a46e4c6215d41cc97ba8dff0cff21ea9b255a8",
+                "reference": "48a46e4c6215d41cc97ba8dff0cff21ea9b255a8",
                 "shasum": ""
             },
             "require": {
@@ -8958,7 +8960,7 @@
                 "twig"
             ],
             "support": {
-                "source": "https://github.com/symfony/ux-twig-component/tree/v2.23.0"
+                "source": "https://github.com/symfony/ux-twig-component/tree/v2.24.0"
             },
             "funding": [
                 {
@@ -8974,7 +8976,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2025-01-25T02:19:26+00:00"
+            "time": "2025-03-21T20:14:36+00:00"
         },
         {
             "name": "symfony/validator",
@@ -9389,16 +9391,16 @@
         },
         {
             "name": "toshy/bunnynet-php",
-            "version": "5.1.0",
+            "version": "5.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/ToshY/BunnyNet-PHP.git",
-                "reference": "a8662a491f7408053b700a31b6f4758d319497fe"
+                "reference": "de7ead050506fe508266f62466cf28be9fb74cad"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ToshY/BunnyNet-PHP/zipball/a8662a491f7408053b700a31b6f4758d319497fe",
-                "reference": "a8662a491f7408053b700a31b6f4758d319497fe",
+                "url": "https://api.github.com/repos/ToshY/BunnyNet-PHP/zipball/de7ead050506fe508266f62466cf28be9fb74cad",
+                "reference": "de7ead050506fe508266f62466cf28be9fb74cad",
                 "shasum": ""
             },
             "require": {
@@ -9444,9 +9446,9 @@
             ],
             "support": {
                 "issues": "https://github.com/ToshY/BunnyNet-PHP/issues",
-                "source": "https://github.com/ToshY/BunnyNet-PHP/tree/5.1.0"
+                "source": "https://github.com/ToshY/BunnyNet-PHP/tree/5.2.0"
             },
-            "time": "2025-03-02T15:21:32+00:00"
+            "time": "2025-04-05T12:17:23+00:00"
         },
         {
             "name": "twig/extra-bundle",
@@ -12792,12 +12794,13 @@
     ],
     "minimum-stability": "stable",
     "stability-flags": {
-        "knplabs/doctrine-behaviors": 20
+        "knplabs/doctrine-behaviors": 20,
+        "survos/core-bundle": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=8.1",
+        "php": ">=8.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-intl": "*",

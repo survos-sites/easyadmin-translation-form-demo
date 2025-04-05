@@ -23,7 +23,7 @@
         "league/csv": "^9.23",
         "phpdocumentor/reflection-docblock": "^5.3",
         "survos/bunny-bundle": "^1.5",
-        "survos/core-bundle": "^1.5",
+        "survos/core-bundle": "dev-main",
         "survos/deployment-bundle": "^1.5",
         "symfony/asset": "^7.2",
         "symfony/asset-mapper": "^7.2",

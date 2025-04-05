@@ -65,6 +65,18 @@
             "ref": "b131e6cbfe1b898a508987851963fff485986285"
         }
     },
+    "inspector-apm/inspector-symfony": {
+        "version": "1.8",
+        "recipe": {
+            "repo": "github.com/symfony/recipes-contrib",
+            "branch": "main",
+            "version": "1.4",
+            "ref": "60ac12d92b25c43830fdf25922e53467058feab1"
+        },
+        "files": [
+            "config/packages/inspector.yaml"
+        ]
+    },
     "knplabs/doctrine-behaviors": {
         "version": "2.6.2"
     },

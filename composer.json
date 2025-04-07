@@ -19,7 +19,7 @@
         "doctrine/orm": "^2.16 || ^3.0",
         "easycorp/easyadmin-bundle": "^4.7",
         "inspector-apm/inspector-symfony": "^1.8",
-        "knplabs/doctrine-behaviors": "dev-sf7.0 as 2.6.3",
+        "tacman/doctrine-behaviors": "dev-sf7.0 as 2.6.3",
         "league/csv": "^9.23",
         "phpdocumentor/reflection-docblock": "^5.3",
         "survos/bunny-bundle": "^1.5",
@@ -119,11 +119,5 @@
         "symfony/phpunit-bridge": "^7.2",
         "symfony/stopwatch": "^7.2",
         "symfony/web-profiler-bundle": "^7.2"
-    },
-    "repositories": {
-        "jfsenechal_doctrine_behaviors": {
-            "type": "vcs",
-            "url": "git@github.com:jfsenechal/DoctrineBehaviors.git"
-        }
     }
 }

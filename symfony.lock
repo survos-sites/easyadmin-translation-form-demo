@@ -77,9 +77,6 @@
             "config/packages/inspector.yaml"
         ]
     },
-    "knplabs/doctrine-behaviors": {
-        "version": "2.6.2"
-    },
     "nyholm/psr7": {
         "version": "1.8",
         "recipe": {
@@ -430,6 +427,9 @@
         "files": [
             "config/packages/messenger.yaml"
         ]
+    },
+    "tacman/doctrine-behaviors": {
+        "version": "dev-sf7.0"
     },
     "twig/extra-bundle": {
         "version": "v3.7.1"

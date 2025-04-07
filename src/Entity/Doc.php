@@ -40,8 +40,8 @@ class Doc implements TranslatableInterface
 
     #[ORM\Column]
     #[Assert\NotNull()]
-    #[Assert\GreaterThan(0)]
-    private int $lineCount = -2;
+    #[Assert\GreaterThanOrEqual(0)]
+    private int $lineCount = 0;
 
     public function getFilename(): ?string
     {

@@ -4,14 +4,61 @@ namespace App\DataFixtures;
 
 use App\Entity\Article;
 use App\Entity\ArticleTranslation;
+use App\Entity\Message;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use League\Csv\Reader;
+use Symfony\Component\DependencyInjection\Attribute\Autowire;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class AppFixtures extends Fixture
 {
+    public function __construct(
+        private TranslatorInterface $translator,
+        #[Autowire('%kernel.enabled_locales%')] private array $enabledLocales,
+        #[Autowire('%kernel.default_locale%')] private string $defaultLocale,
+    )
+    {
+    }
+
     public function load(ObjectManager $manager): void
     {
+
+        // first, get the messages from the default locale to create the message objects
+        $catalogue = $this->translator->getCatalogue($this->defaultLocale);
+        $domain = 'messages';
+        $allMessages[$domain] = $catalogue->all($domain);
+        foreach ($catalogue->all($domain) as $key => $text) {
+//            dd($domain, $key, $text);
+            $message = new Message()
+                ->setDomain($domain)
+                ->setTextKey($key)
+                ->setText($text, $this->defaultLocale);
+            $manager->persist($message);
+            // cache the messages to use later
+            $messageCache[$domain][$key] = $message;
+        }
+
+        foreach ($this->enabledLocales as $locale) {
+            // we already have the default messages loaded
+            if (!$locale === $this->defaultLocale) {
+                continue;
+            }
+            $catalogue = $this->translator->getCatalogue($locale);
+//            foreach ($catalogue->getDomains() as $domain) {
+            $domain = 'messages';
+
+                foreach ($catalogue->all($domain) as $key => $text) {
+                    $messageCache[$domain][$key]->translate($locale)->setText($text);
+                }
+//            }
+        }
+        array_map(fn(Message $message) => $message->mergeNewTranslations(), $messageCache[$domain]);
+
+        // make sure the translate messages are persisted!
+//        dd($messageCache);
+
+
 
         $csv = Reader::createFromPath('data/amazon.csv', 'r');
         $csv->setHeaderOffset(0);

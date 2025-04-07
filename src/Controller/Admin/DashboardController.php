@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Article;
 use App\Entity\Doc;
+use App\Entity\Message;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -32,8 +33,9 @@ class DashboardController extends AbstractDashboardController
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
-            ->renderSidebarMinimized()
-            ->setTitle('TranslationFormDemo')->setLocales($this->enabledLocales)
+            ->renderSidebarMinimized(false)
+            ->setTitle('TranslationFormDemo')
+            ->setLocales($this->enabledLocales)
             ;
     }
 
@@ -41,6 +43,7 @@ class DashboardController extends AbstractDashboardController
     {
         yield MenuItem::linkToCrud('docs', 'fas fa-pencil', Doc::class);
         yield MenuItem::linkToCrud('articles', 'fas fa-pen', Article::class);
+        yield MenuItem::linkToCrud('messages', 'fas fa-pen', Message::class);
     }
 
 }

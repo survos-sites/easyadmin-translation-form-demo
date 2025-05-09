@@ -1,3 +1,35 @@
+# survos-sites/ezt
+
+## Installation
+
+```bash
+git clone git@github.com:survos-sites/ezt ezt && cd ezt
+echo "DATABASE_URL=sqlite:///%kernel.project_dir%/var/data.db" > .env.local
+echo "DATABASE_URL=sqlite:///%kernel.project_dir%/var/data_test.db" > .env.test
+composer install
+bin/console doctrine:schema:update --force
+symfony server:start -d
+symfony open:local
+```
+
+
+
+## Running tests
+
+```bash
+bin/console doctrine:schema:update --force --env=test
+bin/console doctrine:fixtures:load -n --env=test
+vendor/bin/phpunit
+```
+
+
+    usage here.
+
+## Database
+
+![Database Diagram](/assets/images/db.svg)
+
+
 # ezt: Easy Translation Demo
 
 This repository demonstrates how to add entity translation functionality to Easyadmin administrative backend using knplabs/doctrine-behaviors and a2lix/translation-form-bundle.
@@ -51,3 +83,6 @@ An "Article" entity will be created with the ability to translate title, slug an
 
 Many documents are missing and will default to English, e.g 21973A0630-01 is not in EN-DE or EN-DA
 
+
+
+*build with survos/doc-bundle*

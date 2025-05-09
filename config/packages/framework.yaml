@@ -18,8 +18,22 @@ framework:
     php_errors:
         log: true
 
+    router:
+        default_uri: 'https://ezt.survos.com'
+
+when@dev:
+    framework:
+        http_cache: true
+        router:
+            default_uri: 'https://ezt.wip'
+
 when@test:
     framework:
         test: true
         session:
             storage_factory_id: session.storage.factory.mock_file
+
+# this does not cache all pages, but rather allows the application to work as a cache, when #[Cache] is used in a controller
+when@prod:
+    framework:
+        http_cache: true

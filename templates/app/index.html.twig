@@ -19,6 +19,7 @@
 
     {% for a in articles %}
         <li>
+            {{ ux_icon(a|get_class) }}
             <h3>{{ a.title|default('~~') }}</h3>
             {{ a.author }}
             <ol>

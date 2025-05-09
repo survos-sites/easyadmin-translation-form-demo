@@ -9,72 +9,71 @@ use App\Repository\DocRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use League\Csv\Reader;
 use Survos\CoreBundle\Service\SurvosUtils;
+use Symfony\Component\Console\Attribute\Argument;
 use Symfony\Component\Console\Attribute\AsCommand;
+use Symfony\Component\Console\Attribute\Option;
 use Symfony\Component\Console\Helper\ProgressBar;
+use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Finder\Finder;
 use Symfony\Component\String\Slugger\AsciiSlugger;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
-use Zenstruck\Console\Attribute\Argument;
-use Zenstruck\Console\Attribute\Option;
-use Zenstruck\Console\InvokableServiceCommand;
-use Zenstruck\Console\IO;
-use Zenstruck\Console\RunsCommands;
-use Zenstruck\Console\RunsProcesses;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Component\Console\Command\Command;
 
-#[AsCommand('app:ptc-import', 'Import the Parallel Translation Corpus Files into Doc entities')]
-final class ImportPtcCommand extends InvokableServiceCommand
+#[AsCommand('app:ptc:import', 'Import the Parallel Translation Corpus Files into Doc entities', help: <<<END
+After running app:ptc:split, the files...
+END
+)]
+final class PtcImportCommand
 {
-    use RunsCommands;
-    use RunsProcesses;
 
     public function __construct(
         private EntityManagerInterface      $entityManager,
         private DocRepository               $docRepository,
-        private HttpClientInterface         $httpClient,
         private readonly ValidatorInterface $validator,
         private string                      $speaker = '~',
         private array                       $seen = [], // to avoid duplicated within a batch
     )
     {
-        parent::__construct('app:euro');
-
     }
 
     public function __invoke(
-        IO     $io,
+        SymfonyStyle     $io,
         #[Option(description: 'limit the number of records')]
         int    $limit = 50,
         #[Option(description: 'batch size for flush')]
         int    $batch = 5,
-        #[Option(description: 'limit the number of records')]
+        #[Option(description: 'validate the entity before persisting')]
         ?bool $validate=null
     ): int
     {
         $validate ??= false;
         $dir = 'data/ptc';
         if (!file_exists($dir)) {
-            $this->io()->error("Run app:ptc-split first");
-            return self::FAILURE;
+            $io->error("Run app:ptc-split first");
+            return Command::FAILURE;
         }
         // where the translations go as files.
         $fileDir = 'data/ptc/files';
         if (!file_exists($dir)) {
-            $this->io()->error("Run app:ptc-split first");
-            return self::FAILURE;
+            $io->error("Run app:ptc-split first");
+            return Command::FAILURE;
         }
 
         $finder = (new Finder())->directories()->in($fileDir);
-        $progressBar = SurvosUtils::createProgressBar($io, $limit ?: $finder->count());
-        $progressBar->start();
+//        $progressBar = SurvosUtils::createProgressBar($io, $limit ?: $finder->count());
+//        $progressBar->start();
         // the DOCUMENT finder (per directory)
-        foreach ($finder as $idx => $dir) {
-            $progressBar->advance();
+        foreach ($io->progressIterate($finder, $limit ?: $finder->count()) as $idx=>$dir)
+        {
+            $progressBar = $io->createProgressBar($batch);
+//            foreach ($finder as $idx => $dir) {
+//            $progressBar->advance();
             $name = $dir->getBasename();
 
             $localeFinder = (new Finder())->files()->in($dir);
             if ($localeFinder->count() === 0) {
-                $this->io()->warning("No files in $name " . $dir->getRealPath());
+                $io->warning("No files in $name " . $dir->getRealPath());
                 continue;
             }
 
@@ -109,17 +108,18 @@ final class ImportPtcCommand extends InvokableServiceCommand
                     }
                 }
             }
-            if (($progressBar->getProgress() % $batch) === 0) {
+
+            if (($idx % $batch) === 0) {
                 $this->entityManager->flush();
                 $this->entityManager->clear();
             }
-            if ($limit && ($progressBar->getProgress() >= $limit)) {
+
+            if ($limit && ($idx >= $limit)) {
                 break;
             }
         }
-        $progressBar->finish();
         $this->entityManager->flush();
-        $this->io()->success("done: " . $this->docRepository->count());
-        return self::SUCCESS;
+        $io->success("done: " . $this->docRepository->count());
+        return Command::SUCCESS;
     }
 }

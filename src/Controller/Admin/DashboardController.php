@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\Doc;
 use App\Entity\Message;
 use EasyCorp\Bundle\EasyAdminBundle\Attribute\AdminDashboard;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Assets;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -39,11 +40,18 @@ class DashboardController extends AbstractDashboardController
             ;
     }
 
+    public function configureAssets(): Assets
+    {
+        return Assets::new()
+            ->useCustomIconSet()
+            ;
+    }
+
     public function configureMenuItems(): iterable
     {
-        yield MenuItem::linkToCrud('docs', 'fas fa-pencil', Doc::class);
-        yield MenuItem::linkToCrud('articles', 'fas fa-pen', Article::class);
-        yield MenuItem::linkToCrud('messages', 'fas fa-pen', Message::class);
+        yield MenuItem::linkToCrud('docs', 'dots', Doc::class);
+        yield MenuItem::linkToCrud('articles', Article::class, Article::class);
+        yield MenuItem::linkToCrud('messages', 'edit', Message::class);
     }
 
 }

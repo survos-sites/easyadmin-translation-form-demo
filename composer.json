@@ -3,7 +3,7 @@
     "license": "MIT",
     "name": "survos-sites/ezt",
     "description": "Translation Management with EasyAdmin",
-    "minimum-stability": "beta",
+    "minimum-stability": "RC",
     "prefer-stable": true,
     "require": {
         "php": ">=8.4",
@@ -20,6 +20,7 @@
         "easycorp/easyadmin-bundle": "^4.7",
         "inspector-apm/inspector-symfony": "^1.8",
         "league/csv": "^9.23",
+        "nadar/php-composer-reader": "^2.1",
         "phpdocumentor/reflection-docblock": "^5.3",
         "survos/bunny-bundle": "^1.5",
         "survos/core-bundle": "dev-main",
@@ -97,25 +98,25 @@
         "post-update-cmd": [
             "@auto-scripts"
         ],
-        "reset": "rm data/ezt.db -f && bin/console doctrine:schema:update --force",
-        "diagram": "bin/console doctrine:diagram --filename=assets/db.svg --exclude=doctrine_migration_versions,messenger_messages"
-
+        "reset": "rm data/ezt.db -f && bin/console doctrine:schema:update --force"
     },
     "conflict": {
         "symfony/symfony": "*"
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
+            "allow-contrib": "true",
             "require": "^7.3"
         }
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^4.1",
         "jawira/db-draw": "*",
+        "jawira/doctrine-diagram-bundle": "dev-main",
         "phpunit/phpunit": "^12.0",
         "survos/code-bundle": "dev-main",
         "survos/command-bundle": "^1.5",
+        "survos/doc-bundle": "^1.5",
         "symfony/browser-kit": "^7.2",
         "symfony/css-selector": "^7.2",
         "symfony/debug-bundle": "^7.2",

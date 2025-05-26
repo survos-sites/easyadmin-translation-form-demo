@@ -1,6 +1,17 @@
 # survos-sites/ezt
+# ezt: Easy Translation Demo
+
+This repository demonstrates how to add entity translation functionality to Easyadmin administrative backend using knplabs/doctrine-behaviors and a2lix/translation-form-bundle.
+
+It may someday also serve as a playground for json-translate.
+
+This repository is based on the tutorial described at [https://dzhebrak.com/blog/translating-entities-easyadmin-doctrinebehaviors](https://dzhebrak.com/blog/translating-entities-easyadmin-doctrinebehaviors?utm_source=github.com&utm_medium=tutorial_demo&utm_campaign=easyadmin_entity_translation&utm_id=opensource) and is a fork of ..
 
 ## Installation
+
+@todo: make sure .env has
+DATABASE_URL="sqlite:///%kernel.project_dir%/var/data_%kernel.environment%.db"
+
 
 ```bash
 git clone git@github.com:survos-sites/ezt ezt && cd ezt
@@ -25,26 +36,15 @@ vendor/bin/phpunit
 
     usage here.
 
-## Database
+## Entities
 
-![Database Diagram](/assets/images/db.svg)
-
-
-# ezt: Easy Translation Demo
-
-This repository demonstrates how to add entity translation functionality to Easyadmin administrative backend using knplabs/doctrine-behaviors and a2lix/translation-form-bundle.
-
-It may someday also serve as a playground for json-translate.
-
-This repository is based on the tutorial described at [https://dzhebrak.com/blog/translating-entities-easyadmin-doctrinebehaviors](https://dzhebrak.com/blog/translating-entities-easyadmin-doctrinebehaviors?utm_source=github.com&utm_medium=tutorial_demo&utm_campaign=easyadmin_entity_translation&utm_id=opensource) and is a fork of ..
+![Database Diagram](assets/docs/database.svg)
 
 
-# Database
 
-Uses https://github.com/tacman/DoctrineBehaviors 
+Uses https://github.com/tacman/DoctrineBehaviors
 
 https://dzhebrak.com/blog/translating-entities-easyadmin-doctrinebehaviors?utm_source=github.com&utm_medium=tutorial_demo&utm_campaign=easyadmin_entity_translation&utm_id=opensource
-
 
 
 # Data
@@ -72,7 +72,7 @@ wget https://www.statmt.org/europarl/v7/europarl.tgz -O data/europarl
 
 More details at https://www.statmt.org/europarl/
 
-## 
+##
 
 
 https://www.kaggle.com/datasets/hgultekin/paralel-translation-corpus-in-22-languages?resource=download

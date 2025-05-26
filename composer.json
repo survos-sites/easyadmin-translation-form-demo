@@ -124,15 +124,5 @@
         "symfony/phpunit-bridge": "^7.2",
         "symfony/stopwatch": "^7.2",
         "symfony/web-profiler-bundle": "^7.2"
-    },
-    "repositories": {
-        "html_extra": {
-            "type": "path",
-            "url": "/home/tac/g/twigphp/html-extra"
-        },
-        "twig_extra": {
-            "type": "path",
-            "url": "/home/tac/g/twigphp/twig-extra-bundle"
-        }
     }
 }

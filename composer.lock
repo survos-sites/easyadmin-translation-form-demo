@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1d0731d1dbe9bad05c19a61be4389c3f",
+    "content-hash": "898c49f00f3bda50579ac45875eed150",
     "packages": [
         {
             "name": "a2lix/auto-form-bundle",
@@ -3604,12 +3604,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/survos/SurvosCoreBundle.git",
-                "reference": "5df33595fc0998069832a8004f567d305140b119"
+                "reference": "0876c0942ef3c84ecfa4dbb0b85e4dc7613d448b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/survos/SurvosCoreBundle/zipball/5df33595fc0998069832a8004f567d305140b119",
-                "reference": "5df33595fc0998069832a8004f567d305140b119",
+                "url": "https://api.github.com/repos/survos/SurvosCoreBundle/zipball/0876c0942ef3c84ecfa4dbb0b85e4dc7613d448b",
+                "reference": "0876c0942ef3c84ecfa4dbb0b85e4dc7613d448b",
                 "shasum": ""
             },
             "require": {
@@ -3687,7 +3687,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2025-04-05T15:32:02+00:00"
+            "time": "2025-05-26T09:01:39+00:00"
         },
         {
             "name": "survos/deployment-bundle",
@@ -9505,10 +9505,16 @@
         {
             "name": "twig/extra-bundle",
             "version": "3.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/twig-extra-bundle.git",
+                "reference": "614922fff34a4773f2a8c5d04314cf45c92d885a"
+            },
             "dist": {
-                "type": "path",
-                "url": "/home/tac/g/twigphp/twig-extra-bundle",
-                "reference": "62d1cf47a1aa009cbd07b21045b97d3d5cb79896"
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/twig-extra-bundle/zipball/614922fff34a4773f2a8c5d04314cf45c92d885a",
+                "reference": "614922fff34a4773f2a8c5d04314cf45c92d885a",
+                "shasum": ""
             },
             "require": {
                 "php": ">=8.1.0",
@@ -9527,6 +9533,7 @@
                 "twig/markdown-extra": "^3.0",
                 "twig/string-extra": "^3.0"
             },
+            "default-branch": true,
             "type": "symfony-bundle",
             "autoload": {
                 "psr-4": {
@@ -9536,6 +9543,7 @@
                     "/Tests/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -9554,17 +9562,34 @@
                 "extra",
                 "twig"
             ],
-            "transport-options": {
-                "relative": false
-            }
+            "support": {
+                "source": "https://github.com/twigphp/twig-extra-bundle/tree/3.x"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/twig/twig",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2025-05-23T07:29:36+00:00"
         },
         {
             "name": "twig/html-extra",
             "version": "3.x-dev",
-            "dist": {
-                "type": "path",
-                "url": "/home/tac/g/twigphp/html-extra",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/twigphp/html-extra.git",
                 "reference": "5442dd707601c83b8cd4233e37bb10ab8489a90f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/twigphp/html-extra/zipball/5442dd707601c83b8cd4233e37bb10ab8489a90f",
+                "reference": "5442dd707601c83b8cd4233e37bb10ab8489a90f",
+                "shasum": ""
             },
             "require": {
                 "php": ">=8.1.0",
@@ -9575,6 +9600,7 @@
             "require-dev": {
                 "symfony/phpunit-bridge": "^6.4|^7.0"
             },
+            "default-branch": true,
             "type": "library",
             "autoload": {
                 "files": [
@@ -9587,6 +9613,7 @@
                     "/Tests/"
                 ]
             },
+            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -9604,9 +9631,20 @@
                 "html",
                 "twig"
             ],
-            "transport-options": {
-                "relative": false
-            }
+            "support": {
+                "source": "https://github.com/twigphp/html-extra/tree/v3.21.0"
+            },
+            "funding": [
+                {
+                    "url": "https://github.com/fabpot",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/twig/twig",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2025-02-19T14:29:33+00:00"
         },
         {
             "name": "twig/intl-extra",

@@ -1,0 +1,9 @@
+# config/packages/ux_icons.yaml
+ux_icons:
+  default_icon_attributes:
+    width: 30px
+  aliases:
+     'App\Entity\Article': tabler:news
+     edit: tabler:edit
+     dots:                'clarity:ellipsis-horizontal-line'
+     privacy:             'bi:cookie'

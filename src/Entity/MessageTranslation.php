@@ -7,6 +7,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Contract\Entity\TranslationInterface;
 use Knp\DoctrineBehaviors\Model\Translatable\TranslationTrait;
+use Symfony\Component\Serializer\Attribute\Groups;
 
 #[ORM\Entity(repositoryClass: MessageTranslationRepository::class)]
 class MessageTranslation  implements TranslationInterface
@@ -19,6 +20,7 @@ class MessageTranslation  implements TranslationInterface
     private ?int $id = null;
 
     #[ORM\Column(type: Types::TEXT, nullable: true)]
+//    #[Groups(['message.translation', 'message.read'])]
     private ?string $text = null;
 
     public function getId(): ?int

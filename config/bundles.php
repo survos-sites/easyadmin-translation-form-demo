@@ -27,4 +27,7 @@ return [
     Survos\CodeBundle\SurvosCodeBundle::class => ['dev' => true, 'test' => true],
     Jawira\DoctrineDiagramBundle\DoctrineDiagramBundle::class => ['dev' => true],
     Survos\DocBundle\SurvosDocBundle::class => ['dev' => true, 'test' => true],
+    ApiPlatform\Symfony\Bundle\ApiPlatformBundle::class => ['all' => true],
+    Survos\InspectionBundle\SurvosInspectionBundle::class => ['all' => true],
+    Survos\MeiliBundle\SurvosMeiliBundle::class => ['all' => true],
 ];

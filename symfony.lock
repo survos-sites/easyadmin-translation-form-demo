@@ -5,6 +5,20 @@
     "a2lix/translation-form-bundle": {
         "version": "3.2.1"
     },
+    "api-platform/core": {
+        "version": "4.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "4.0",
+            "ref": "cb9e6b8ceb9b62f32d41fc8ad72a25d5bd674c6d"
+        },
+        "files": [
+            "config/packages/api_platform.yaml",
+            "config/routes/api_platform.yaml",
+            "src/ApiResource/.gitignore"
+        ]
+    },
     "bizkit/versioning-bundle": {
         "version": "1.2",
         "recipe": {
@@ -16,6 +30,15 @@
         "files": [
             "config/packages/bizkit_versioning.yaml"
         ]
+    },
+    "doctrine/deprecations": {
+        "version": "1.1",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "1.0",
+            "ref": "87424683adc81d7dc305eefec1fced883084aab9"
+        }
     },
     "doctrine/doctrine-bundle": {
         "version": "2.10",
@@ -164,6 +187,12 @@
     },
     "survos/doc-bundle": {
         "version": "dev-main"
+    },
+    "survos/inspection-bundle": {
+        "version": "1.5.600"
+    },
+    "survos/meili-bundle": {
+        "version": "1.5.0"
     },
     "symfony/asset-mapper": {
         "version": "7.2",
@@ -317,6 +346,18 @@
             "bin/phpunit",
             "phpunit.xml.dist",
             "tests/bootstrap.php"
+        ]
+    },
+    "symfony/property-info": {
+        "version": "7.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "main",
+            "version": "7.3",
+            "ref": "dae70df71978ae9226ae915ffd5fad817f5ca1f7"
+        },
+        "files": [
+            "config/packages/property_info.yaml"
         ]
     },
     "symfony/routing": {

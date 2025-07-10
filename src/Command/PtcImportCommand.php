@@ -109,7 +109,7 @@ final class PtcImportCommand
                 }
             }
 
-            if (($idx % $batch) === 0) {
+            if (($progressBar->getProgress() % $batch) === 0) {
                 $this->entityManager->flush();
                 $this->entityManager->clear();
             }

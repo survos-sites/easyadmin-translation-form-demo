@@ -12,11 +12,13 @@
         "ext-intl": "*",
         "ext-pdo_sqlite": "*",
         "a2lix/translation-form-bundle": "^3.2",
+        "api-platform/core": "^4.1",
+        "api-platform/doctrine-orm": "*",
         "cmsig/seal-meilisearch-adapter": "^0.7.1",
         "cmsig/seal-symfony-bundle": "^0.7.1",
         "doctrine/doctrine-bundle": "^2.10",
         "doctrine/doctrine-migrations-bundle": "^3.2",
-        "doctrine/orm": "^2.16 || ^3.0",
+        "doctrine/orm": "^3.4",
         "easycorp/easyadmin-bundle": "^4.7",
         "inspector-apm/inspector-symfony": "^1.8",
         "league/csv": "^9.23",
@@ -25,6 +27,7 @@
         "survos/bunny-bundle": "^1.5",
         "survos/core-bundle": "dev-main",
         "survos/deployment-bundle": "^1.5",
+        "survos/meili-bundle": "^1.5",
         "symfony/asset": "^7.2",
         "symfony/asset-mapper": "^7.2",
         "symfony/console": "^7.2",
@@ -62,6 +65,7 @@
     "config": {
         "allow-plugins": {
             "php-http/discovery": true,
+            "survos/installer": true,
             "symfony/flex": true,
             "symfony/runtime": true
         },
